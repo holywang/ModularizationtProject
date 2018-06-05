@@ -1,4 +1,4 @@
-package com.holy.dataprovider.network;
+package com.holy.dataprovider.network.network;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
