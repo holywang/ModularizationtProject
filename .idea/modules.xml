@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/ModularizationtProject.iml" filepath="$PROJECT_DIR$/ModularizationtProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dataprovider/dataprovider.iml" filepath="$PROJECT_DIR$/dataprovider/dataprovider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/indexlist/indexlist.iml" filepath="$PROJECT_DIR$/indexlist/indexlist.iml" />
     </modules>
   </component>
 </project>

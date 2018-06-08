@@ -1,1 +1,1 @@
-include ':app', ':dataprovider'
+include ':app', ':dataprovider', ':indexlist'

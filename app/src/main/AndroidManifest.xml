@@ -23,7 +23,11 @@
         </activity>
         <activity
             android:name=".main.RootActivity"
-            android:label="@string/title_activity_root"></activity>
+            android:label="@string/title_activity_root" />
+        <activity
+            android:name=".search.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

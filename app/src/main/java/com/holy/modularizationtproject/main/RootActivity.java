@@ -12,18 +12,16 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.holy.indexlist.listener.OnSelectListener;
+import com.holy.indexlist.views.RightScrollIndexView;
 import com.holy.modularizationtproject.R;
 import com.holy.modularizationtproject.component.view.MoveButton;
 
 public class RootActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private MoveButton moveButton;
-    private float statusBarHeight1 = -1;
-    private float startPostionX,startPostionY;
-    private long startTime = 0;
-
-    private float moveBtnWidth,moveBtnHeight;
+    private RightScrollIndexView indexView;
+    private BottomNavigationView btnNavigation;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -50,71 +48,25 @@ public class RootActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_root);
 
-
-        //获取status_bar_height资源的ID
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            //根据资源ID获取响应的尺寸值
-            statusBarHeight1 = getResources().getDimensionPixelSize(resourceId);
-        }
-
         mTextMessage = findViewById(R.id.message);
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        moveButton = new MoveButton(this);
-        moveBtnWidth = moveButton.bitmapX;
-        moveBtnHeight = moveButton.bitmapY;
-        startPostionX = moveButton.getX();
-        startPostionY = moveButton.getY();
-
-        ConstraintLayout rootLayout = findViewById(R.id.container);
-        rootLayout.addView(moveButton);
-
-
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        if(event.getAction()==MotionEvent.ACTION_DOWN) {
-            startTime = System.currentTimeMillis();
-        }
-        if(event.getAction()==MotionEvent.ACTION_MOVE) {
-            dealMoveButton(event);
-        }
-
-        if(event.getAction()==MotionEvent.ACTION_UP) {
-
-            float x = event.getX()-startPostionX;
-            float y = event.getY()-startPostionY;
-
-            startPostionX = event.getX();
-            startPostionY = event.getY();
-
-            if(Math.abs(x)<50 && Math.abs(y)<50){
-                if (System.currentTimeMillis() - startTime <200){
-                    Toast.makeText(this, "it is click", Toast.LENGTH_SHORT).show();
-                }
-
+        indexView = findViewById(R.id.index);
+        indexView.setSelectListener(new OnSelectListener() {
+            @Override
+            public void onSelect(int position, String text) {
+                mTextMessage.setText(text);
             }
-            startTime = 0;
+        });
+        btnNavigation = findViewById(R.id.navigation);
 
-        }
-        return super.onTouchEvent(event);
+        btnNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
-    private void dealMoveButton(MotionEvent event){
-        if(statusBarHeight1 != -1) {
-            moveButton.bitmapX = event.getRawX()-moveBtnWidth/2;
-            moveButton.bitmapY = event.getRawY() - statusBarHeight1 - moveBtnHeight/2;
-            moveButton.invalidate();
-        }
-    }
+//
 
     @Override
     protected void onDestroy() {
-        moveButton.recycle();
         super.onDestroy();
     }
 }
