@@ -32,7 +32,12 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        showSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
 
     }

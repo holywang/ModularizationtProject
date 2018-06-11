@@ -1,27 +1,36 @@
 package com.holy.modularizationtproject.main;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.holy.indexlist.listener.OnSelectListener;
-import com.holy.indexlist.views.RightScrollIndexView;
 import com.holy.modularizationtproject.R;
-import com.holy.modularizationtproject.component.view.MoveButton;
+import com.holy.modularizationtproject.component.utils.AnimationUtil;
+import com.holy.modularizationtproject.component.view.LeafLoadingView;
+import com.holy.modularizationtproject.search.SearchActivity;
+
+import java.util.Random;
 
 public class RootActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private RightScrollIndexView indexView;
     private BottomNavigationView btnNavigation;
+    private static final int REFRESH_PROGRESS = 0x10;
+    private LeafLoadingView mLeafLoadingView;
+    private int mProgress = 0;
+    private View mFanView;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -42,6 +51,36 @@ public class RootActivity extends AppCompatActivity {
         }
     };
 
+    @SuppressLint("HandlerLeak")
+    Handler mHandler = new Handler() {
+
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case REFRESH_PROGRESS:
+                    if (mProgress < 40) {
+                        mProgress += 1;
+                        // 随机800ms以内刷新一次
+                        mHandler.sendEmptyMessageDelayed(REFRESH_PROGRESS,
+                                new Random().nextInt(800));
+                        mLeafLoadingView.setProgress(mProgress);
+                    } else if(mProgress >= 100){
+                        mTextMessage.setText("finish");
+                        mLeafLoadingView.setProgress(mProgress);
+                    }else {
+                        mProgress += 1;
+                        // 随机1200ms以内刷新一次
+                        mHandler.sendEmptyMessageDelayed(REFRESH_PROGRESS,
+                                new Random().nextInt(1200));
+                        mLeafLoadingView.setProgress(mProgress);
+
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        };
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,17 +89,27 @@ public class RootActivity extends AppCompatActivity {
 
         mTextMessage = findViewById(R.id.message);
 
-        indexView = findViewById(R.id.index);
-        indexView.setSelectListener(new OnSelectListener() {
-            @Override
-            public void onSelect(int position, String text) {
-                mTextMessage.setText(text);
-            }
-        });
         btnNavigation = findViewById(R.id.navigation);
 
         btnNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        mTextMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent();
+                it.setClass(RootActivity.this, SearchActivity.class);
+                startActivity(it);
+            }
+        });
+
+        mFanView = findViewById(R.id.fan_pic);
+        RotateAnimation rotateAnimation = AnimationUtil.initRotateAnimation(false, 1500, true,
+                Animation.INFINITE);
+        mFanView.startAnimation(rotateAnimation);
+
+        mLeafLoadingView = findViewById(R.id.leaf_loading);
+
+        mHandler.sendEmptyMessageDelayed(REFRESH_PROGRESS, 3000);
     }
 
 //
