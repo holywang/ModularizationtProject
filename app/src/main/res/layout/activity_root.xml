@@ -35,6 +35,20 @@
             android:src="@drawable/fengshan" />
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/search_activity_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/leaf_content"
+        android:text="SearchActivity"/>
+
+    <Button
+        android:id="@+id/path_activity_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_activity_button"
+        android:text="PathActivity"/>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

@@ -13,13 +13,16 @@ import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.holy.modularizationtproject.R;
 import com.holy.modularizationtproject.component.utils.AnimationUtil;
 import com.holy.modularizationtproject.component.view.LeafLoadingView;
+import com.holy.modularizationtproject.path.PathActivity;
 import com.holy.modularizationtproject.search.SearchActivity;
 
+import java.nio.file.Path;
 import java.util.Random;
 
 public class RootActivity extends AppCompatActivity {
@@ -30,6 +33,7 @@ public class RootActivity extends AppCompatActivity {
     private LeafLoadingView mLeafLoadingView;
     private int mProgress = 0;
     private View mFanView;
+    private Button searchActivity,pathActivity;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -91,9 +95,13 @@ public class RootActivity extends AppCompatActivity {
 
         btnNavigation = findViewById(R.id.navigation);
 
+        searchActivity = findViewById(R.id.search_activity_button);
+
+        pathActivity = findViewById(R.id.path_activity_button);
+
         btnNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        mTextMessage.setOnClickListener(new View.OnClickListener() {
+        searchActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent();
@@ -102,6 +110,14 @@ public class RootActivity extends AppCompatActivity {
             }
         });
 
+        pathActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent();
+                it.setClass(RootActivity.this, PathActivity.class);
+                startActivity(it);
+            }
+        });
         mFanView = findViewById(R.id.fan_pic);
         RotateAnimation rotateAnimation = AnimationUtil.initRotateAnimation(false, 1500, true,
                 Animation.INFINITE);
@@ -113,6 +129,7 @@ public class RootActivity extends AppCompatActivity {
     }
 
 //
+
 
     @Override
     protected void onDestroy() {
