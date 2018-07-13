@@ -19,10 +19,10 @@ import android.widget.TextView;
 import com.holy.modularizationtproject.R;
 import com.holy.modularizationtproject.component.utils.AnimationUtil;
 import com.holy.modularizationtproject.component.view.LeafLoadingView;
+import com.holy.modularizationtproject.glide.GlideActivity;
 import com.holy.modularizationtproject.path.PathActivity;
 import com.holy.modularizationtproject.search.SearchActivity;
 
-import java.nio.file.Path;
 import java.util.Random;
 
 public class RootActivity extends AppCompatActivity {
@@ -33,7 +33,7 @@ public class RootActivity extends AppCompatActivity {
     private LeafLoadingView mLeafLoadingView;
     private int mProgress = 0;
     private View mFanView;
-    private Button searchActivity,pathActivity;
+    private Button searchActivity,pathActivity,glideActivity;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -95,6 +95,8 @@ public class RootActivity extends AppCompatActivity {
 
         btnNavigation = findViewById(R.id.navigation);
 
+        glideActivity = findViewById(R.id.glide_activity_button);
+
         searchActivity = findViewById(R.id.search_activity_button);
 
         pathActivity = findViewById(R.id.path_activity_button);
@@ -115,6 +117,15 @@ public class RootActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent();
                 it.setClass(RootActivity.this, PathActivity.class);
+                startActivity(it);
+            }
+        });
+
+        glideActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent();
+                it.setClass(RootActivity.this, GlideActivity.class);
                 startActivity(it);
             }
         });
