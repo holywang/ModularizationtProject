@@ -97,6 +97,7 @@ public class GlideActivity extends BaseActivity {
 
                     @Override
                     public void getData(GankIOAndroidBean data) {
+
                         list = data.getResults();
 
                         adapter = new GlideAdapter(list, getApplicationContext());
@@ -108,6 +109,7 @@ public class GlideActivity extends BaseActivity {
                         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
 
                         itemTouchHelper.attachToRecyclerView(glide_recycler_list);
+
                     }
 
                     @Override
@@ -133,9 +135,6 @@ public class GlideActivity extends BaseActivity {
             c.drawLine(0, parent.getY(), parent.getX(), parent.getY(), paint);
         }
     };
-
-
-
 
 }
 

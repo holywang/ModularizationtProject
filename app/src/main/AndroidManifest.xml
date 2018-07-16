@@ -32,7 +32,8 @@
         <activity
             android:name=".path.PathActivity"
             android:label="@string/title_activity_path" />
-        <activity android:name=".glide.GlideActivity"></activity>
+        <activity android:name=".glide.GlideActivity" />
+        <activity android:name=".glide.WebActivity"></activity>
     </application>
 
 </manifest>

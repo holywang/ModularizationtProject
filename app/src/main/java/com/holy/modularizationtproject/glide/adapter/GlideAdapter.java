@@ -1,6 +1,7 @@
 package com.holy.modularizationtproject.glide.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.holy.dataprovider.network.bean.GankIOAndroidBean;
 import com.holy.modularizationtproject.R;
 import com.holy.modularizationtproject.glide.GlideInterface;
+import com.holy.modularizationtproject.glide.WebActivity;
 
 import java.util.List;
 
@@ -52,6 +54,27 @@ public class GlideAdapter extends RecyclerView.Adapter<GlideHolder> implements G
         });
 
         holder.deleteLayout.setVisibility(View.INVISIBLE);
+
+        holder.textItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClick(view,position);
+            }
+        });
+
+        holder.descImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClick(view,position);
+            }
+        });
+    }
+
+    private void onItemClick(View view,int position) {
+        Intent it = new Intent();
+        it.setClass(context, WebActivity.class);
+        it.putExtra("data",list.get(position));
+        context.startActivity(it);
     }
 
 

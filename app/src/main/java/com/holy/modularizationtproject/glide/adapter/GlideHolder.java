@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.holy.modularizationtproject.R;
@@ -17,9 +18,11 @@ public class GlideHolder extends RecyclerView.ViewHolder {
     public TextView title,decs,deleteText;
     public ImageView descImage;
     public FrameLayout deleteLayout;
+    public LinearLayout textItem;
     public GlideHolder(View itemView) {
         super(itemView);
 
+        textItem = itemView.findViewById(R.id.glide_text_item);
         title = itemView.findViewById(R.id.glide_title);
         descImage = itemView.findViewById(R.id.glide_desc_image);
         decs = itemView.findViewById(R.id.glide_desc);
