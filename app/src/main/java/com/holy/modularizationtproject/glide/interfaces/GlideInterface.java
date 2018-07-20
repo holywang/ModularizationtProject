@@ -1,4 +1,4 @@
-package com.holy.modularizationtproject.glide;
+package com.holy.modularizationtproject.glide.interfaces;
 
 import android.support.v7.widget.RecyclerView;
 

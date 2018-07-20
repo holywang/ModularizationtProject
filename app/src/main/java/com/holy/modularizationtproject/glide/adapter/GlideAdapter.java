@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.holy.dataprovider.network.bean.GankIOAndroidBean;
 import com.holy.modularizationtproject.R;
-import com.holy.modularizationtproject.glide.GlideInterface;
+import com.holy.modularizationtproject.glide.interfaces.GlideInterface;
 import com.holy.modularizationtproject.glide.WebActivity;
 
 import java.util.List;

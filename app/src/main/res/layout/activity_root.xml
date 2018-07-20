@@ -56,6 +56,13 @@
         android:layout_below="@+id/path_activity_button"
         android:text="GlideActivity"/>
 
+    <Button
+        android:id="@+id/glide_image_activity_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/glide_activity_button"
+        android:text="GlideImageActivity"/>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

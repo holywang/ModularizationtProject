@@ -20,6 +20,7 @@ import com.holy.modularizationtproject.R;
 import com.holy.modularizationtproject.component.utils.AnimationUtil;
 import com.holy.modularizationtproject.component.view.LeafLoadingView;
 import com.holy.modularizationtproject.glide.GlideActivity;
+import com.holy.modularizationtproject.glide.ImageGlideActivity;
 import com.holy.modularizationtproject.path.PathActivity;
 import com.holy.modularizationtproject.search.SearchActivity;
 
@@ -33,7 +34,7 @@ public class RootActivity extends AppCompatActivity {
     private LeafLoadingView mLeafLoadingView;
     private int mProgress = 0;
     private View mFanView;
-    private Button searchActivity,pathActivity,glideActivity;
+    private Button searchActivity,pathActivity,glideActivity,glideImageActivity;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -101,6 +102,8 @@ public class RootActivity extends AppCompatActivity {
 
         pathActivity = findViewById(R.id.path_activity_button);
 
+        glideImageActivity = findViewById(R.id.glide_image_activity_button);
+
         btnNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         searchActivity.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +140,15 @@ public class RootActivity extends AppCompatActivity {
         mLeafLoadingView = findViewById(R.id.leaf_loading);
 
         mHandler.sendEmptyMessageDelayed(REFRESH_PROGRESS, 3000);
+
+        glideImageActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent();
+                it.setClass(RootActivity.this, ImageGlideActivity.class);
+                startActivity(it);
+            }
+        });
     }
 
 //
