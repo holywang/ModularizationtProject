@@ -19,10 +19,11 @@ import android.widget.TextView;
 import com.holy.modularizationtproject.R;
 import com.holy.modularizationtproject.component.utils.AnimationUtil;
 import com.holy.modularizationtproject.component.view.LeafLoadingView;
+import com.holy.modularizationtproject.glide.GlideActivity;
+import com.holy.modularizationtproject.glide.ImageGlideActivity;
 import com.holy.modularizationtproject.path.PathActivity;
 import com.holy.modularizationtproject.search.SearchActivity;
 
-import java.nio.file.Path;
 import java.util.Random;
 
 public class RootActivity extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class RootActivity extends AppCompatActivity {
     private LeafLoadingView mLeafLoadingView;
     private int mProgress = 0;
     private View mFanView;
-    private Button searchActivity,pathActivity;
+    private Button searchActivity,pathActivity,glideActivity,glideImageActivity;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -95,9 +96,13 @@ public class RootActivity extends AppCompatActivity {
 
         btnNavigation = findViewById(R.id.navigation);
 
+        glideActivity = findViewById(R.id.glide_activity_button);
+
         searchActivity = findViewById(R.id.search_activity_button);
 
         pathActivity = findViewById(R.id.path_activity_button);
+
+        glideImageActivity = findViewById(R.id.glide_image_activity_button);
 
         btnNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -118,6 +123,15 @@ public class RootActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+
+        glideActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent();
+                it.setClass(RootActivity.this, GlideActivity.class);
+                startActivity(it);
+            }
+        });
         mFanView = findViewById(R.id.fan_pic);
         RotateAnimation rotateAnimation = AnimationUtil.initRotateAnimation(false, 1500, true,
                 Animation.INFINITE);
@@ -126,6 +140,15 @@ public class RootActivity extends AppCompatActivity {
         mLeafLoadingView = findViewById(R.id.leaf_loading);
 
         mHandler.sendEmptyMessageDelayed(REFRESH_PROGRESS, 3000);
+
+        glideImageActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent();
+                it.setClass(RootActivity.this, ImageGlideActivity.class);
+                startActivity(it);
+            }
+        });
     }
 
 //

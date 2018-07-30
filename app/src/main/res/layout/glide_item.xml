@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/glide_text_item"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/glide_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123" />
+
+        <TextView
+            android:id="@+id/glide_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="234" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/glide_desc_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:layout_alignParentRight="true"/>
+
+    <FrameLayout
+        android:id="@+id/glide_right_layout"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:background="#f33213">
+
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="点击删除"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+
+</RelativeLayout>

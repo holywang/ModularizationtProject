@@ -6,6 +6,7 @@ import com.holy.dataprovider.interfaces.DatabaseProvider;
 import com.holy.dataprovider.interfaces.NetworkProvider;
 import com.holy.dataprovider.network.NetHelper;
 import com.holy.dataprovider.network.bean.GankIOAndroidBean;
+import com.holy.dataprovider.network.bean.GankIOFuliBean;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -64,8 +65,35 @@ public class DataProvider implements NetworkProvider,DatabaseProvider{
                 });
     }
 
+    @Override
+    public void getFuliData(int number, int page, final DataCallback callback) {
+        netHelper.setUrl(Constant.GANK_IO_URI)
+                .setGankIOHelper()
+                .getFuliInfo(number,page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GankIOFuliBean>() {
+                    @Override
+                    public void onCompleted() {
+                        callback.complete();
+                    }
 
-    static class DataProviderProxy implements NetworkProvider,DatabaseProvider{
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.error(e);
+                    }
+
+                    @Override
+                    public void onNext(GankIOFuliBean gankIOFuliBean) {
+                        callback.getData(gankIOFuliBean);
+                    }
+
+
+                });
+    }
+
+
+    public static class DataProviderProxy implements NetworkProvider,DatabaseProvider{
 
         private DataProvider provider;
 
@@ -88,6 +116,11 @@ public class DataProvider implements NetworkProvider,DatabaseProvider{
         @Override
         public void getAndroidData(int number,int page,DataCallback callback) {
             provider.getAndroidData(number,page,callback);
+        }
+
+        @Override
+        public void getFuliData(int number, int page, DataCallback callback) {
+            provider.getFuliData(number,page,callback);
         }
     }
 }
