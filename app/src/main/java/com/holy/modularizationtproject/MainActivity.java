@@ -18,7 +18,12 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView splashView ;
 
-    private Handler splashHandler;
+    private Handler splashHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message message) {
+            return false;
+        }
+    });
 
     @SuppressLint("HandlerLeak")
     @Override

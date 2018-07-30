@@ -38,8 +38,8 @@ public class SpiderNetView extends View {
     @SuppressLint("Recycle")
     public SpiderNetView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray s = getContext().obtainStyledAttributes(attrs, R.styleable.SpiderNetView);
-        count = s.getInteger(R.styleable.SpiderNetView_count,6);
+//        TypedArray s = getContext().obtainStyledAttributes(attrs, R.styleable.SpiderNetView);
+//        count = s.getInteger(R.styleable.SpiderNetView_count,6);
     }
 
     public void setCount(int count) {
